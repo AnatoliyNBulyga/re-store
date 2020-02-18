@@ -1,7 +1,18 @@
 const BOOKS_LOADED = 'BOOKS_LOADED';
 
 const initialState = {
-    books: []
+    books: [
+        {
+            id: 1,
+            title: 'Production-Ready Microservices ',
+            author: 'Susan J. Fowler',
+        },
+        {
+            id: 2,
+            title: 'Release It! ',
+            author: 'Michael T. Nygard',
+        }
+    ]
 };
 
 const reducer = (state = initialState, action) => {
