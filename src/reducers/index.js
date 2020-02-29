@@ -1,24 +1,36 @@
-const BOOKS_LOADED = 'BOOKS_LOADED';
-const BOOKS_REQUESTED = 'BOOKS_REQUESTED';
+export const FETCH_BOOKS_SUCCESS = 'FETCH_BOOKS_SUCCESS';
+export const FETCH_BOOKS_REQUEST = 'FETCH_BOOKS_REQUEST';
+export const FETCH_BOOKS_FAILURE = 'FETCH_BOOKS_FAILURE';
 
 const initialState = {
     books: [],
-    loading: true
+    loading: true,
+    error: null
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case BOOKS_REQUESTED: {
+        case FETCH_BOOKS_REQUEST:
            return {
                books: state.books,
-               loading: true
+               loading: true,
+               error: null
            };
-        }
-        case BOOKS_LOADED :
+
+        case FETCH_BOOKS_SUCCESS :
             return {
                 books: action.payload,
-                loading: false
+                loading: false,
+                error: null
             };
+
+        case FETCH_BOOKS_FAILURE :
+            return {
+                books: [],
+                loading: false,
+                error: action.payload
+            }
+
         default:
             return state;
     }
