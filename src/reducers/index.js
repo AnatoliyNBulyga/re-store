@@ -1,17 +1,22 @@
 export const FETCH_BOOKS_SUCCESS = 'FETCH_BOOKS_SUCCESS';
 export const FETCH_BOOKS_REQUEST = 'FETCH_BOOKS_REQUEST';
 export const FETCH_BOOKS_FAILURE = 'FETCH_BOOKS_FAILURE';
+export const BOOK_ADDED_TO_CART = 'BOOK_ADDED_TO_CART';
 
 const initialState = {
-    books: [],
-    loading: true,
-    error: null
+   books: [],
+   loading: true,
+   error: null,
+   cartItems: [],
+   orderTotal: 220
 };
 
 const reducer = (state = initialState, action) => {
+    
     switch (action.type) {
         case FETCH_BOOKS_REQUEST:
            return {
+               ...state,
                books: state.books,
                loading: true,
                error: null
@@ -19,6 +24,7 @@ const reducer = (state = initialState, action) => {
 
         case FETCH_BOOKS_SUCCESS :
             return {
+                ...state,
                 books: action.payload,
                 loading: false,
                 error: null
@@ -26,9 +32,27 @@ const reducer = (state = initialState, action) => {
 
         case FETCH_BOOKS_FAILURE :
             return {
+                ...state,
                 books: [],
                 loading: false,
                 error: action.payload
+            }
+
+        case BOOK_ADDED_TO_CART :
+            const bookId = action.payload;
+            const book = state.books.find((book) => book.id === bookId);
+            const newItem = {
+                id: book.id,
+                name: book.title,
+                count: 1,
+                total: book.price
+            };
+            return {
+                ...state,
+                cartItems: [
+                    ...state.cartItems,
+                    newItem
+                ]
             }
 
         default:
