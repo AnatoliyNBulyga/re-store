@@ -2,10 +2,14 @@ import {
     FETCH_BOOKS_REQUEST,
     FETCH_BOOKS_SUCCESS,
     FETCH_BOOKS_FAILURE,
+} from '../reducers/book-list';
+
+import {
     BOOK_ADDED_TO_CART,
     BOOK_DELETED_IN_CART,
     ALL_BOOK_DELETED_IN_CART
-} from '../reducers/index'
+} from '../reducers/shopping-cart';
+
 const booksLoaded = (newBooks) => {
     return {
         type: FETCH_BOOKS_SUCCESS,
